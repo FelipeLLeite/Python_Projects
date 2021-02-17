@@ -10,4 +10,4 @@ try:
     ) as connection:
         print(connection)
 except Error as e:
-    print(e)
+    print(f"Error - {e}")
