@@ -37,8 +37,8 @@ def decryption(encode_msg: str, cesar_key: int) -> str:
 
 if __name__ == "__main__":
     msg = "lets try to do a big message and see what is the output"
-    key = randint(1,10)
-    # key = 7
+    key = randint(1, 10)
+    # key = 25
     encode_msg = encryption(msg, key)
     decode_msg = decryption(encode_msg, key)
     print(f"""
@@ -47,10 +47,3 @@ Key:     {key}
 Encode:  {encode_msg}
 Decode:  {decode_msg}
     """)
-
-""" ERROS
-Message: lets try to do a big message and see what is the output
-Key:     7
-Encode:  slaz ayf av kv h ipn tlzzhnl huk zll doha pz aol vbawba
-Decode:  less srx so do a big message and see vhas is she otspts
-"""

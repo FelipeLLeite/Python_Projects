@@ -87,8 +87,8 @@ if __name__ == "__main__":
     msg = "Felipe ama a Barbara"
     key = generate_random_key()
     key = "ejipzja"
+    
     encode_msg = encryption(msg, key)
-
     decode_msg = decryption(encode_msg, key)
 
     print(f"""
