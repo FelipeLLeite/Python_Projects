@@ -1,8 +1,6 @@
 import string
 from random import randint
 punct_chars = string.punctuation
-punct_chars = string.punctuation
-punct_chars = string.punctuation
 
 
 def encryption(message: str, cesar_key: int = 3) -> str:
