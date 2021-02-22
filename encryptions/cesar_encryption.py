@@ -1,4 +1,5 @@
 import string
+from random import randint
 upper_chars = string.ascii_uppercase
 lower_chars = string.ascii_lowercase
 
@@ -22,13 +23,34 @@ def encryption(message: str, cesar_key: int = 3) -> str:
 
 
 def decryption(encode_msg: str, cesar_key: int) -> str:
-    decode = ""
+    decode = temp = ""
     for ch in encode_msg:
-        pass
-    return ""
+        if ch.isspace():
+            temp = " "
+        elif ord(ch.lower()) - cesar_key < ord("a"):
+            temp = chr(ord("z") + ord(ch.lower()) - ord("a") - cesar_key + 1)
+        else:
+            temp = chr(ord(ch.lower()) - cesar_key)
+        decode += temp.upper() if ch.isupper() else temp
+    return decode
 
 
 if __name__ == "__main__":
-    msg = "Felipe Lopes Leite"
-    key = 10
-    print(encryption(msg, key))
+    msg = "lets try to do a big message and see what is the output"
+    key = randint(1,10)
+    # key = 7
+    encode_msg = encryption(msg, key)
+    decode_msg = decryption(encode_msg, key)
+    print(f"""
+Message: {msg}
+Key:     {key}
+Encode:  {encode_msg}
+Decode:  {decode_msg}
+    """)
+
+""" ERROS
+Message: lets try to do a big message and see what is the output
+Key:     7
+Encode:  slaz ayf av kv h ipn tlzzhnl huk zll doha pz aol vbawba
+Decode:  less srx so do a big message and see vhas is she otspts
+"""
