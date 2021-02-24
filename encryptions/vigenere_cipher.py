@@ -3,7 +3,7 @@ import string
 from random import randint
 
 # Global variables
-punct = string.punctuation
+punct_chars = string.punctuation
 alphabet = string.ascii_lowercase
 
 
@@ -17,7 +17,7 @@ def print_dict(d: dict, key: str = None) -> None:
 
 
 def generate_random_key() -> str:
-    size = randint(1, 10)
+    size = randint(1, 15)
     res = ""
     for _ in range(size):
         res += alphabet[randint(0, len(alphabet)-1)]
@@ -50,44 +50,40 @@ def encryption(msg: str, key: str) -> str:
     idx = 0
     encode = ""
     for ch in msg:
-        temp = key[idx].lower()
-        if ch.isupper():
-            encode += d[key[idx].lower()][ord(ch.lower()) - ord("a")].upper()
-            idx += 1
-        elif ch.isspace() or ch.isdigit() or ch in punct:
-            encode += ch
-        else:
-            encode += d[key[idx].lower()][ord(ch.lower()) - ord("a")]
-            idx += 1
         idx = 0 if idx == len(key) else idx
+        cesar_key = ord(key[idx].lower()) - ord("a")
+        if ch.isspace() or ch.isdigit() or ch in punct_chars:
+            temp = ch
+        else:
+            temp = chr((ord(ch.lower()) + cesar_key - ord("a")) % 26 + ord("a"))  # nopep8
+        encode += temp.upper() if ch.isupper() else temp
+        idx += 1
     return "".join(encode)
 
 
-def decryption(encode: str, key: str) -> str:
+def decryption(encode_msg: str, key: str) -> str:
     decode = ""
-
-    idx = len(encode) % len(key) if len(key) < len(encode) else 0
-    for ch in encode:
-        temp = key[idx].lower()
-        if ch.isupper():
-            decode += alphabet[d[key[idx].lower()].index(ch.lower())].upper()
-            idx += 1
-        elif ch.isspace() or ch.isdigit() or ch in punct:
-            decode += ch
-        else:
-            decode += alphabet[d[key[idx].lower()].index(ch.lower())]
-            idx += 1
+    idx = 0
+    for ch in encode_msg:
         idx = 0 if idx == len(key) else idx
-
-    return "".join(decode)
+        cesar_key = ord(key[idx].lower()) - ord("a")
+        if ch.isspace() or ch.isdigit() or ch in punct_chars:
+            temp = ch
+        elif ord(ch.lower()) - cesar_key < ord("a"):
+            temp = chr(ord("z") + ord(ch.lower()) - ord("a") - cesar_key + 1)
+        else:
+            temp = chr(ord(ch.lower()) - cesar_key)
+        decode += temp.upper() if ch.isupper() else temp
+        idx += 1
+    return decode
 
 
 if __name__ == "__main__":
     d = build_table()
-    msg = "Felipe ama a Barbara"
+    msg = "Lets try another message"
     key = generate_random_key()
-    key = "ejipzja"
-    
+    # key = "ejipzja"
+
     encode_msg = encryption(msg, key)
     decode_msg = decryption(encode_msg, key)
 

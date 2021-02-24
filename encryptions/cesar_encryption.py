@@ -8,14 +8,14 @@ def encryption(message: str, cesar_key: int = 3) -> str:
     Cesar Cypher
     In encryption is one of the simplest and most widely known encryption techniques. It is a type of substitution cipher in which each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet. For example, with a left shift of 3, D would be replaced by A, E would become B, and so on. The method is named after Julius Caesar, who used it in his private correspondence.
     '''
-    result = temp = ""
+    encode = temp = ""
     for ch in message:
         if ch.isspace() or ch.isdigit() or ch in punct_chars:
             temp = ch
         else:
             temp = chr((ord(ch.lower()) + cesar_key - ord("a")) % 26 + ord("a"))  # nopep8
-        result += temp.upper() if ch.isupper() else temp
-    return result
+        encode += temp.upper() if ch.isupper() else temp
+    return encode
 
 
 def decryption(encode_msg: str, cesar_key: int) -> str:
