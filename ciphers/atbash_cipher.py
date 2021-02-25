@@ -5,7 +5,10 @@ alphabet = string.ascii_lowercase
 reverse_alphabet = alphabet[::-1]
 
 
-def encryption(msg: str) -> str:
+def encipher(msg: str) -> str:
+    '''
+    The Atbash cipher is a substitution cipher with a specific key where the letters of the alphabet are reversed. I.e. all 'A's are replaced with 'Z's, all 'B's are replaced with 'Y's, and so on. It was originally used for the Hebrew alphabet, but can be used for any alphabet.
+    '''
     encode = temp = ""
     for ch in msg:
         if ch.isspace() or ch.isdigit() or ch in punct_chars:
@@ -16,7 +19,7 @@ def encryption(msg: str) -> str:
     return encode
 
 
-def decryption(encode_msg: str) -> str:
+def decipher(encode_msg: str) -> str:
     decode = temp = ""
     for ch in encode_msg:
         if ch.isspace() or ch.isdigit() or ch in punct_chars:
@@ -29,14 +32,11 @@ def decryption(encode_msg: str) -> str:
 
 if __name__ == "__main__":
     msg = "string.ascii_letters"
-    key = randint(1, 10)
-    # key = 25
-    encode_msg = encryption(msg)
-    decode_msg = decryption(encode_msg)
+    encode_msg = encipher(msg)
+    decode_msg = decipher(encode_msg)
     print(f"""
     Message: {msg}
-    Key:     {key}
     Encode:  {encode_msg}
     Decode:  {decode_msg}
-        """)
+    """)
     # print(reverse_alphabet)

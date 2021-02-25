@@ -7,15 +7,6 @@ punct_chars = string.punctuation
 alphabet = string.ascii_lowercase
 
 
-def print_dict(d: dict, key: str = None) -> None:
-    if key:
-        for ch in key:
-            print(d[ch.lower()])
-    else:
-        for k, v in d.items():
-            print(k, v)
-
-
 def generate_random_key() -> str:
     size = randint(1, 15)
     res = ""
@@ -46,7 +37,7 @@ def build_table() -> dict:
     return d
 
 
-def encryption(msg: str, key: str) -> str:
+def encipher(msg: str, key: str) -> str:
     idx = 0
     encode = ""
     for ch in msg:
@@ -61,7 +52,7 @@ def encryption(msg: str, key: str) -> str:
     return "".join(encode)
 
 
-def decryption(encode_msg: str, key: str) -> str:
+def decipher(encode_msg: str, key: str) -> str:
     decode = ""
     idx = 0
     for ch in encode_msg:
@@ -84,8 +75,8 @@ if __name__ == "__main__":
     key = generate_random_key()
     # key = "ejipzja"
 
-    encode_msg = encryption(msg, key)
-    decode_msg = decryption(encode_msg, key)
+    encode_msg = encipher(msg, key)
+    decode_msg = decipher(encode_msg, key)
 
     print(f"""
 Message: {msg}

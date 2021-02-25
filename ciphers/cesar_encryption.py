@@ -3,10 +3,9 @@ from random import randint
 punct_chars = string.punctuation
 
 
-def encryption(message: str, cesar_key: int = 3) -> str:
+def encipher(message: str, cesar_key: int = 3) -> str:
     '''
-    Cesar Cypher
-    In encryption is one of the simplest and most widely known encryption techniques. It is a type of substitution cipher in which each letter in the plaintext is replaced by a letter some fixed number of positions down the alphabet. For example, with a left shift of 3, D would be replaced by A, E would become B, and so on. The method is named after Julius Caesar, who used it in his private correspondence.
+    The Caesar cipher is one of the earliest known and simplest ciphers. It is a type of substitution cipher in which each letter in the plaintext is 'shifted' a certain number of places down the alphabet. For example, with a shift of 1, A would be replaced by B, B would become C, and so on. The method is named after Julius Caesar, who apparently used it to communicate with his generals.
     '''
     encode = temp = ""
     for ch in message:
@@ -18,7 +17,7 @@ def encryption(message: str, cesar_key: int = 3) -> str:
     return encode
 
 
-def decryption(encode_msg: str, cesar_key: int) -> str:
+def decipher(encode_msg: str, cesar_key: int) -> str:
     decode = temp = ""
     for ch in encode_msg:
         if ch.isspace() or ch.isdigit() or ch in punct_chars:
@@ -35,8 +34,8 @@ if __name__ == "__main__":
     msg = "lets try to do a big message and see what is the output"
     key = randint(1, 10)
     # key = 25
-    encode_msg = encryption(msg, key)
-    decode_msg = decryption(encode_msg, key)
+    encode_msg = encipher(msg, key)
+    decode_msg = decipher(encode_msg, key)
     print(f"""
     Message: {msg}
     Key:     {key}
